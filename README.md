@@ -17,9 +17,9 @@ followed by the additional arguments for specification:
 
 |Argument       | Use           |Default |
 |:-------------: |:-------------| :-----|
-|-r|video path to right input |no default|
-|-l|video path to left input|no default|
-|-v|define verbosity, 0=False 1=True |default False|
+|-r|path to right input video|no default|
+|-l|path to left input video|no default|
+|-v|define verbosity, 0=False 1=True|default False|
 |-n|number of calibration images that should be acquired|default 20|
 
 <img 
