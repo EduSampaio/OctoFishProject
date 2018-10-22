@@ -7,7 +7,7 @@ below).
 
 ## Usage
 
-Tested with listed dependencies and versions:
+Reliably tested with these versions:
 
 |Dependencies|Version |
 |:---|:---:|
