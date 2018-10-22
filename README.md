@@ -11,7 +11,6 @@ In order to use the stereocalibraion script (command line interface)
 navigate to the 
 containing folder and execute
 ```
-bash
 python stereo_calib.py
 ```
 followed by the additional arguments for specification:
@@ -33,8 +32,7 @@ checkerboard corners of five calibration frames.
 ## Example
 
 ```
-bash
- python stereo_calib.py -l 20181008-PM1-C1-calib-SYNCHED.mp4 -r 
+python stereo_calib.py -l 20181008-PM1-C1-calib-SYNCHED.mp4 -r 
 20181008-PM1-C2-calib-SNYCHED.mp4 -n 5
 ```
 
