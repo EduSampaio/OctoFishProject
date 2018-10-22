@@ -7,7 +7,7 @@ below).
 
 ## Usage
 
-In order to use the stereocalibraion script (command line interface) 
+In order to use the stereo calibration script (command line interface) 
 navigate to the 
 containing folder and execute
 ```
