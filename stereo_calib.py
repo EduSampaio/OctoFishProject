@@ -71,8 +71,8 @@ ret_r, rightFrame = right.read()
 # make sure both cameras captured frame:
 while (ret_l == True) and (ret_r == True):
     print('Processing frame:',frameId,end='\r')
-    # if (counter < args['num_images']) and (frameId % 10 == 0):
-    if (frameId == 140) or (frameId == 220) and (counter < args['num_images']) and (frameId % 10 == 0):
+    # only views every tenth frame for a more random choice. True random image pick not yet implemented.
+    if (counter < args['num_images']) and (frameId % 10 == 0):
         leftFrame = cv2.cvtColor(leftFrame,cv2.COLOR_BGR2GRAY)
         rightFrame = cv2.cvtColor(rightFrame,cv2.COLOR_BGR2GRAY)
 
