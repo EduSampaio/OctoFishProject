@@ -7,6 +7,15 @@ below).
 
 ## Usage
 
+Tested with listed dependencies and versions:
+
+|Dependencies|Version |
+|:---|:---:|
+|Python|3.7.0 |
+|OpenCV|3.4.3|
+|numpy|1.15.2|
+|matplotlib|2.2.3|
+
 In order to use the stereo calibration script (command line interface)
 navigate to the
 containing folder and execute
