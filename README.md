@@ -28,7 +28,7 @@ followed by the additional arguments for specification:
 |:-------------: |:-------------| :-----|
 |-r|path to right input video|no default|
 |-l|path to left input video|no default|
-|-v|define verbosity, 0=False 1=True|default False|
+|-v|define verbosity, False/True|default False|
 |-n|number of calibration images that should be acquired|default 20|
 |-c|checkerboard pattern (rows,columns)|default 9 7|
 
