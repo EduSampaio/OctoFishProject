@@ -7,7 +7,8 @@ below).
 
 ## Usage
 
-In order to use FlumeView (command line interface) navigate to the 
+In order to use the stereocalibraion scrip (command line interface) 
+navigate to the 
 containing folder and execute
 ```bash
 python stereo_calib.py
@@ -22,4 +23,4 @@ followed by the additional arguments for specification:
 |-n|number of calibration images that should be acquired|default 20|
 
 If this helps, you have comments about the software or you have further 
-requests please feel free to email me (fritz.a.francisco@gmail.com).
+requests please feel free to email me [fritz.a.francisco@gmail.com].
