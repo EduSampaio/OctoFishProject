@@ -15,6 +15,7 @@ limitations under the License.
 
 import numpy as np
 import cv2
+import os, sys
 import glob
 import random
 import argparse
@@ -77,11 +78,12 @@ while (ret_l == True) and (ret_r == True):
 
         left_cal, corners_l = cv2.findChessboardCorners(leftFrame, (pattern_rows,pattern_columns), None,flags=find_chessboard_flags)
         right_cal, corners_r = cv2.findChessboardCorners(rightFrame, (pattern_rows,pattern_columns),None, flags=find_chessboard_flags)
-        corners_l = cv2.cornerSubPix(leftFrame,corners_l,(11,11),(-1,-1),criteria)
-        corners_r = cv2.cornerSubPix(rightFrame,corners_r,(11,11),(-1,-1),criteria)
 
         # synchronously find checkerboard
         if (left_cal == True) and (right_cal == True):
+            corners_l = cv2.cornerSubPix(leftFrame,corners_l,(11,11),(-1,-1),criteria)
+            corners_r = cv2.cornerSubPix(rightFrame,corners_r,(11,11),(-1,-1),criteria)
+
             if frame_shape == None:
                 frame_shape = rightFrame.shape
             h,w = frame_shape[:2]
@@ -212,6 +214,6 @@ while (ret_l == True) and (ret_r == True):
         plt.title('3D point cloud')
         plt.show()
 
-        # np.savez("calibration_" + videos[0].replace(".mp4","_") + videos[1].replace(".mp4",".npz"), cameraMatrix1 = cameraMatrix1, distCoeffs1 = distCoeffs1, cameraMatrix2 = cameraMatrix2, distCoeffs2 = distCoeffs2, R = R,T = T, E = E, F = F)
+        np.savez(os.path.join(args['output'] + "calibration_" + videos[0].replace(".mp4","_") + videos[1].replace(".mp4",".npz")), cameraMatrix1 = cameraMatrix1, distCoeffs1 = distCoeffs1, cameraMatrix2 = cameraMatrix2, distCoeffs2 = distCoeffs2, R = R,T = T, E = E, F = F)
         print("Successfully calibrated stereo camera!")
         break
