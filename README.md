@@ -29,5 +29,13 @@ width="800">
 Image 1.: Sample verbose output showing estimated 3D positions of 
 checkerboard corners of five calibration frames.
 
+## Example
+
+```
+bash
+ python stereo_calib.py -l 20181008-PM1-C1-calib-SYNCHED.mp4 -r 
+20181008-PM1-C2-calib-SNYCHED.mp4 -n 5
+```
+
 If this helps, you have comments about the software or you have further 
 requests please feel free to email me [fritz.a.francisco@gmail.com].
