@@ -1,6 +1,6 @@
 # Stereo calibration:
 
-This script is designed to calibrate a stereocamera and save the
+This script is designed to calibrate a stereo camera and save the
 required calibration metrix in a ouput (.npz) file. Further verbosity of
 the viewable output can be enabled by setting the equivalent flag (see
 below).
@@ -28,10 +28,10 @@ followed by the additional arguments for specification:
 |:-------------: |:-------------| :-----|
 |-r|path to right input video|no default|
 |-l|path to left input video|no default|
-|-v|define verbosity, False/True|default False|
-|-n|number of calibration images that should be acquired|default 20|
-|-c|checkerboard pattern (rows,columns)|default 9 7|
-|-o|output path|default .|
+|-v|define verbosity, False/True|False|
+|-n|number of calibration images that should be acquired|20|
+|-c|checkerboard pattern (rows,columns)|9 7|
+|-o|output path|'.'|
 
 <img
 src="https://github.com/EduSampaio/OctoFishProject/blob/master/checkerboard_positions.png"
