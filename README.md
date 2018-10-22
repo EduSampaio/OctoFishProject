@@ -23,7 +23,7 @@ followed by the additional arguments for specification:
 |-n|number of calibration images that should be acquired|default 20|
 
 <img 
-src="https://github.com/EduSampaio/OctoFishProject/checkerboard_positions.png" 
+src="https://github.com/EduSampaio/OctoFishProject/blob/master/checkerboard_positions.png" 
 width="400">
 
 Image 1.: Sample verbose output showing estimated 3D positions of 
