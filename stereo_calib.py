@@ -29,6 +29,7 @@ ap.add_argument('-l','--left_input',type=str,required=True, help="path to left v
 ap.add_argument('-v','--verbose',type=bool,default=False,help="visualize cameras")
 ap.add_argument('-o','--output',type=str,default='.',help="output path")
 ap.add_argument('-n','--num-images',type=int,default=20)
+ap.add_argument('-c','--calib_pattern',nargs='+',type=int,default= [9,7],help='checkerboard pattern (rows, columns)')
 args = vars(ap.parse_args())
 print(args)
 
@@ -40,8 +41,10 @@ find_chessboard_flags = cv2.CALIB_CB_ADAPTIVE_THRESH | cv2.CALIB_CB_NORMALIZE_IM
 stereo_flags = cv2.CALIB_FIX_INTRINSIC
 
 # define checkerboard pattern
-pattern_columns = 8
-pattern_rows = 6
+# pattern_columns = 8
+# pattern_rows = 6
+pattern_columns = args['calib_pattern'][0]
+pattern_rows = args['calib_pattern'][1]
 
 # Filenames are just an increasing number
 frameId = 0
@@ -156,33 +159,33 @@ while (ret_l == True) and (ret_r == True):
         ax = fig.add_subplot(111, projection='3d')
 
         for i,idx in enumerate(frame_list):
-            right.set(cv2.CAP_PROP_POS_FRAMES,idx)
-            left.set(cv2.CAP_PROP_POS_FRAMES,idx)
-
-            r, right_frame  = right.read()
-            l, left_frame  = left.read()
-
-            right_img_remap = cv2.remap(right_frame, right_maps[0], right_maps[1], cv2.INTER_LANCZOS4)
-            left_img_remap = cv2.remap(left_frame, left_maps[0], left_maps[1], cv2.INTER_LANCZOS4)
-
-            # x1,y1,w1,h1 = roi1
-            # x2,y2,w2,h2 = roi2
-            # right_frame= right_frame[y1:y1+h1, x1:x1+w1]
-            # left_frame= left_frame[y2:y2+h2, x2:x2+w2]
-
-            right_img_remap = cv2.resize(right_img_remap, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
-            left_img_remap = cv2.resize(left_img_remap, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
-            right_frame = cv2.resize(right_frame, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
-            left_frame = cv2.resize(left_frame, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
-
-            # See the results
-            view = np.hstack([right_frame, left_frame])
-            rectView = np.hstack([right_img_remap, left_img_remap])
-
-            cv2.imshow('view', view)
-            cv2.imshow('rectView', rectView)
-            # Wait indefinitely for any keypress
-            cv2.waitKey(0)
+            # right.set(cv2.CAP_PROP_POS_FRAMES,idx)
+            # left.set(cv2.CAP_PROP_POS_FRAMES,idx)
+            #
+            # r, right_frame  = right.read()
+            # l, left_frame  = left.read()
+            #
+            # right_img_remap = cv2.remap(right_frame, right_maps[0], right_maps[1], cv2.INTER_LANCZOS4)
+            # left_img_remap = cv2.remap(left_frame, left_maps[0], left_maps[1], cv2.INTER_LANCZOS4)
+            #
+            # # x1,y1,w1,h1 = roi1
+            # # x2,y2,w2,h2 = roi2
+            # # right_frame= right_frame[y1:y1+h1, x1:x1+w1]
+            # # left_frame= left_frame[y2:y2+h2, x2:x2+w2]
+            #
+            # right_img_remap = cv2.resize(right_img_remap, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
+            # left_img_remap = cv2.resize(left_img_remap, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
+            # right_frame = cv2.resize(right_frame, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
+            # left_frame = cv2.resize(left_frame, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
+            #
+            # # See the results
+            # view = np.hstack([right_frame, left_frame])
+            # rectView = np.hstack([right_img_remap, left_img_remap])
+            #
+            # cv2.imshow('view', view)
+            # cv2.imshow('rectView', rectView)
+            # # Wait indefinitely for any keypress
+            # cv2.waitKey(0)
 
             # Create 3D points through triangulation
             X = cv2.triangulatePoints( P1, P2, data[0]['imgpts'][i], data[1]['imgpts'][i])
