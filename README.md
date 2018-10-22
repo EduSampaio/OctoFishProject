@@ -24,7 +24,7 @@ followed by the additional arguments for specification:
 
 <img 
 src="https://github.com/EduSampaio/OctoFishProject/blob/master/checkerboard_positions.png" 
-width="400">
+width="800">
 
 Image 1.: Sample verbose output showing estimated 3D positions of 
 checkerboard corners of five calibration frames.
