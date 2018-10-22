@@ -10,7 +10,8 @@ below).
 In order to use the stereocalibraion script (command line interface) 
 navigate to the 
 containing folder and execute
-```bash
+```
+bash
 python stereo_calib.py
 ```
 followed by the additional arguments for specification:
