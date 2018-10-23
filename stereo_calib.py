@@ -152,67 +152,69 @@ while (ret_l == True) and (ret_r == True):
                                               alpha= 1
                                               )
 
-        right_maps = cv2.initUndistortRectifyMap(cameraMatrix1, distCoeffs1, R1, P1,frame_shape, cv2.CV_16SC2)
-        left_maps = cv2.initUndistortRectifyMap(cameraMatrix2, distCoeffs2, R2, P2, frame_shape, cv2.CV_16SC2)
+        if args['verbose'] == True:
 
-        fig = plt.figure()
-        fig.patch.set_facecolor('black')
-        ax = fig.add_subplot(111, projection='3d')
+            right_maps = cv2.initUndistortRectifyMap(cameraMatrix1, distCoeffs1, R1, P1,frame_shape, cv2.CV_16SC2)
+            left_maps = cv2.initUndistortRectifyMap(cameraMatrix2, distCoeffs2, R2, P2, frame_shape, cv2.CV_16SC2)
 
-        for i,idx in enumerate(frame_list):
-            # right.set(cv2.CAP_PROP_POS_FRAMES,idx)
-            # left.set(cv2.CAP_PROP_POS_FRAMES,idx)
-            #
-            # r, right_frame  = right.read()
-            # l, left_frame  = left.read()
-            #
-            # right_img_remap = cv2.remap(right_frame, right_maps[0], right_maps[1], cv2.INTER_LANCZOS4)
-            # left_img_remap = cv2.remap(left_frame, left_maps[0], left_maps[1], cv2.INTER_LANCZOS4)
-            #
-            # # x1,y1,w1,h1 = roi1
-            # # x2,y2,w2,h2 = roi2
-            # # right_frame= right_frame[y1:y1+h1, x1:x1+w1]
-            # # left_frame= left_frame[y2:y2+h2, x2:x2+w2]
-            #
-            # right_img_remap = cv2.resize(right_img_remap, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
-            # left_img_remap = cv2.resize(left_img_remap, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
-            # right_frame = cv2.resize(right_frame, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
-            # left_frame = cv2.resize(left_frame, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
-            #
-            # # See the results
-            # view = np.hstack([right_frame, left_frame])
-            # rectView = np.hstack([right_img_remap, left_img_remap])
-            #
-            # cv2.imshow('view', view)
-            # cv2.imshow('rectView', rectView)
-            # # Wait indefinitely for any keypress
-            # cv2.waitKey(0)
+            fig = plt.figure()
+            fig.patch.set_facecolor('black')
+            ax = fig.add_subplot(111, projection='3d')
 
-            # Create 3D points through triangulation
-            X = cv2.triangulatePoints( P1, P2, data[0]['imgpts'][i], data[1]['imgpts'][i])
+            for i,idx in enumerate(frame_list):
+                # right.set(cv2.CAP_PROP_POS_FRAMES,idx)
+                # left.set(cv2.CAP_PROP_POS_FRAMES,idx)
+                #
+                # r, right_frame  = right.read()
+                # l, left_frame  = left.read()
+                #
+                # right_img_remap = cv2.remap(right_frame, right_maps[0], right_maps[1], cv2.INTER_LANCZOS4)
+                # left_img_remap = cv2.remap(left_frame, left_maps[0], left_maps[1], cv2.INTER_LANCZOS4)
+                #
+                # # x1,y1,w1,h1 = roi1
+                # # x2,y2,w2,h2 = roi2
+                # # right_frame= right_frame[y1:y1+h1, x1:x1+w1]
+                # # left_frame= left_frame[y2:y2+h2, x2:x2+w2]
+                #
+                # right_img_remap = cv2.resize(right_img_remap, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
+                # left_img_remap = cv2.resize(left_img_remap, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
+                # right_frame = cv2.resize(right_frame, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
+                # left_frame = cv2.resize(left_frame, None, fx = 0.3, fy = 0.3, interpolation = cv2.INTER_CUBIC)
+                #
+                # # See the results
+                # view = np.hstack([right_frame, left_frame])
+                # rectView = np.hstack([right_img_remap, left_img_remap])
+                #
+                # cv2.imshow('view', view)
+                # cv2.imshow('rectView', rectView)
+                # # Wait indefinitely for any keypress
+                # cv2.waitKey(0)
 
-            # Remember to divide out the 4th row. Make it homogeneous
-            X /= X[3]
-            X = X.T
+                # Create 3D points through triangulation
+                X = cv2.triangulatePoints( P1, P2, data[0]['imgpts'][i], data[1]['imgpts'][i])
 
-            # # Recover the origin arrays from PX
-            # x1 = np.dot(P1[:3],X)
-            # x2 = np.dot(P2[:3],X)
-            # # Again, put in homogeneous form before using them
-            # x1 /= x1[2]
-            # x2 /= x2[2]
+                # Remember to divide out the 4th row. Make it homogeneous
+                X /= X[3]
+                X = X.T
 
-            # plot with matplotlib
-            Ys = X[:, 0]
-            Zs = X[:, 1]
-            Xs = X[:, 2]
+                # # Recover the origin arrays from PX
+                # x1 = np.dot(P1[:3],X)
+                # x2 = np.dot(P2[:3],X)
+                # # Again, put in homogeneous form before using them
+                # x1 /= x1[2]
+                # x2 /= x2[2]
 
-            ax.scatter(Xs, Ys, Zs, marker='o')
-        ax.set_xlabel('Y')
-        ax.set_ylabel('Z')
-        ax.set_zlabel('X')
-        plt.title('3D point cloud')
-        plt.show()
+                # plot with matplotlib
+                Ys = X[:, 0]
+                Zs = X[:, 1]
+                Xs = X[:, 2]
+
+                ax.scatter(Xs, Ys, Zs, marker='o')
+            ax.set_xlabel('Y')
+            ax.set_ylabel('Z')
+            ax.set_zlabel('X')
+            plt.title('3D point cloud')
+            plt.show()
 
         np.savez(os.path.join(args['output'] + "calibration_" + videos[0].replace(".mp4","_") + videos[1].replace(".mp4",".npz")), cameraMatrix1 = cameraMatrix1, distCoeffs1 = distCoeffs1, cameraMatrix2 = cameraMatrix2, distCoeffs2 = distCoeffs2, R = R,T = T, E = E, F = F)
         print("Successfully calibrated stereo camera!")
