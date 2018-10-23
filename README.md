@@ -31,7 +31,7 @@ followed by the additional arguments for specification:
 |-v|define verbosity, False/True|False|
 |-n|number of calibration images that should be acquired|20|
 |-c|checkerboard pattern (rows,columns)|9 7|
-|-o|output path|'.'|
+|-o|output path|''|
 
 <img
 src="https://github.com/EduSampaio/OctoFishProject/blob/master/checkerboard_positions.png"

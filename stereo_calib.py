@@ -27,7 +27,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument('-r','--right_input',type=str,required=True, help="path to right video")
 ap.add_argument('-l','--left_input',type=str,required=True, help="path to left video")
 ap.add_argument('-v','--verbose',type=bool,default=False,help="visualize cameras")
-ap.add_argument('-o','--output',type=str,default='.',help="output path")
+ap.add_argument('-o','--output',type=str,default='',help="output path")
 ap.add_argument('-n','--num-images',type=int,default=20)
 ap.add_argument('-c','--calib_pattern',nargs='+',type=int,default= [9,7],help='checkerboard pattern (rows, columns)')
 args = vars(ap.parse_args())
@@ -214,6 +214,6 @@ while (ret_l == True) and (ret_r == True):
         plt.title('3D point cloud')
         plt.show()
 
-        np.savez("calibration_" + videos[0].replace(".mp4","_") + videos[1].replace(".mp4",".npz"), cameraMatrix1 = cameraMatrix1, distCoeffs1 = distCoeffs1, cameraMatrix2 = cameraMatrix2, distCoeffs2 = distCoeffs2, R = R,T = T, E = E, F = F)
+        np.savez(os.path.join(args['output'] + "calibration_" + videos[0].replace(".mp4","_") + videos[1].replace(".mp4",".npz")), cameraMatrix1 = cameraMatrix1, distCoeffs1 = distCoeffs1, cameraMatrix2 = cameraMatrix2, distCoeffs2 = distCoeffs2, R = R,T = T, E = E, F = F)
         print("Successfully calibrated stereo camera!")
         break
